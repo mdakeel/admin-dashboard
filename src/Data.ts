@@ -1,10 +1,14 @@
 // sidebarData.ts
 import { IconType } from 'react-icons';
-import { RiDashboardFill, RiCoupon2Fill } from 'react-icons/ri';
-import { RiShoppingBag2Fill } from 'react-icons/ri';
-import { IoIosPeople } from 'react-icons/io';
-import { AiFillFileText } from 'react-icons/ai';
-import { FaChartBar, FaChartPie, FaChartLine, FaStopwatch, FaGamepad} from 'react-icons/fa';
+import { RiDashboardLine, RiCoupon2Line } from 'react-icons/ri';
+import { RiShoppingBag2Line } from 'react-icons/ri';
+import { IoMdStopwatch } from "react-icons/io";
+import { LuBarChart4 } from "react-icons/lu";
+import { PiChartLineUpBold } from "react-icons/pi";
+import { MdOutlinePeopleAlt } from "react-icons/md";
+import { TbChartPie } from "react-icons/tb";
+import { LuGamepad2 } from "react-icons/lu";
+import {FaRegFileAlt} from 'react-icons/fa';
 
 export interface SidebarItem {
     id: number;
@@ -18,25 +22,25 @@ export const dashboard: SidebarItem[] = [
         id: 1,
         url: "/admin/dashboard",
         text: "Dashboard",
-        icon: RiDashboardFill
+        icon: RiDashboardLine
     },
     {
         id: 2,
         url: "/admin/products",
         text: "Products",
-        icon: RiShoppingBag2Fill
+        icon: RiShoppingBag2Line
     },
     {
         id: 3,
         url: "/admin/customers",
         text: "Customers",
-        icon: IoIosPeople
+        icon: MdOutlinePeopleAlt
     },
     {
         id: 4,
         url: "/admin/transaction",
         text: "Transaction",
-        icon: AiFillFileText
+        icon: FaRegFileAlt
     }
    
 ];
@@ -46,19 +50,19 @@ export const charts : SidebarItem[] = [
         id: 1,
         url: "/admin/chart/bar",
         text: "Bar",
-        icon: FaChartBar
+        icon: LuBarChart4
     },
     {
         id: 2,
         url: "/admin/chart/pie",
         text: "Pie",
-        icon: FaChartPie
+        icon: TbChartPie
     },
     {
         id: 3,
         url: "/admin/chart/line",
         text: "Line",
-        icon: FaChartLine
+        icon: PiChartLineUpBold
     },
        
 ];
@@ -68,19 +72,19 @@ export const app : SidebarItem[] = [
         id: 1,
         url: "/admin/app/stopwatch",
         text: "Stop Watch",
-        icon: FaStopwatch
+        icon: IoMdStopwatch
     },
     {
         id: 2,
         url: "/admin/app/coupon",
         text: "Coupon",
-        icon: RiCoupon2Fill
+        icon: RiCoupon2Line
     },
     {
         id: 3,
         url: "/admin/app/toss",
         text: "Toss",
-        icon: FaGamepad
+        icon: LuGamepad2
     },
        
 ];

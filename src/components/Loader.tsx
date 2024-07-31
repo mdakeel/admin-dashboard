@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loader = () => {
   return (
-    <div>Loading...</div>
+    <div className='flex items-center justify-center mt-[20%]'>Loading...</div>
   )
 }
 

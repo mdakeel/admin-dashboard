@@ -2,7 +2,11 @@ import React from 'react'
 
 const Transaction = () => {
   return (
-    <div>Transaction</div>
+    <div className=''>        
+    <main className='p-10'>
+        transaction
+    </main>
+</div>
   )
 }
 

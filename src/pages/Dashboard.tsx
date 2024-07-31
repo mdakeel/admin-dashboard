@@ -1,26 +1,16 @@
-import React from 'react'
-import Sidebar from '../components/commen/Sidebar'
-import Header from '../components/commen/Header'
+// Dashboard.tsx
+import React from 'react';
+import WidgetItem from '../components/admin/dashboard/WidgetItem';
 
 const Dashboard = () => {
   return (
-    <div className=''>
-        <div className='w-full flex '>
-        {/* side bar */}
-        <div className='w-1/6'>
-        <Sidebar />
-        </div>
-
-        {/* main container */}
-        <div className='w-5/6 '>
-        <Header />
-        <main className='p-10'>
-            hellow world
-        </main>
-        </div>
-        </div>
+    <div className='px-10 pt-8'>
+      <h1 className='text-2xl font-semibold '>Dashboard</h1>
+      <div className='pt-4'>
+        <WidgetItem />
+      </div>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
