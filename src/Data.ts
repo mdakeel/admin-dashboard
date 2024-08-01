@@ -9,6 +9,7 @@ import { MdOutlinePeopleAlt } from "react-icons/md";
 import { TbChartPie } from "react-icons/tb";
 import { LuGamepad2 } from "react-icons/lu";
 import {FaRegFileAlt} from 'react-icons/fa';
+import WidgetItem from './components/admin/dashboard/WidgetItem';
 
 export interface SidebarItem {
     id: number;
@@ -16,6 +17,7 @@ export interface SidebarItem {
     text: string;
     icon: IconType;
 }
+
 
 export const dashboard: SidebarItem[] = [
     {
@@ -88,3 +90,5 @@ export const app : SidebarItem[] = [
     },
        
 ];
+
+
