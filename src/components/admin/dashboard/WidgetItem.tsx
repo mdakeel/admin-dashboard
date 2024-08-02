@@ -5,7 +5,7 @@ import { FiShoppingBag } from "react-icons/fi";
 
 const WidgetItem = () => {
   return (
-    <div className=" w-full bg-[#F9FAFB] items-center justify-center gap-6 mt-6 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+    <div className=" w-full bg-[#F9FAFB] gap-6 mt-6 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
       {/* total orders */}
       <div className=" bg-white w-full h-[90px] shadow-sm rounded-lg ">
         <div className="flex items-center  gap-6 px-4 py-3">

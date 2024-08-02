@@ -5,7 +5,7 @@ import MobileSidebar from './MobileSidebar';
 const Sidebar = ({isCollapsed}: any) => {
    
   return (
-    <div className='z-20'>
+    <div className='z-20 '>
         {/* dextop sidebar */}
         {
             isCollapsed ? (<MobileSidebar />) : (<DextopSidebar />)

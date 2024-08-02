@@ -5,8 +5,8 @@ import logo from '../../assets/logo.png'
 
 const MobileSidebar = () => {
   return (
-    <div className=' fixed top-0 left-0 h-full flex flex-col gap-6 mt-4  z-20 bg-white items-center '>
-         <Link to={'/admin/dashboard'} className='flex items-center justify-center gap-2 mt-[2px]  pb-4 cursor-pointer '>
+    <div className=' fixed top-0 left-0 h-full flex flex-col gap-6 md:mt-4  z-20 bg-white items-center '>
+         <Link to={'/admin/dashboard'} className='flex items-center justify-center gap-2 md:mt-[2px] mt-5  pb-4 cursor-pointer '>
                 <img src={logo} className='md:w-7 w-6 object-cover' alt="logo" />
             </Link>
         {/* dashboard */}
