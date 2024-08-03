@@ -138,6 +138,7 @@ interface Transaction {
     name: string;
     price: number;
     stock: number;
+    category : string
     // action: ReactElement
     action: string;
   }
@@ -147,7 +148,9 @@ interface Transaction {
   const img3 = "https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-the-smartwatch-banner-png-image_11919210.png"
 
   export const Products: Product[] = [
-    { id: 1, photo:img1, name: 'Laptop', price: 23,  stock: 7, action: "Manage"},
-    { id: 2, photo:img2, name: 'Mobile', price: 13,  stock: 3, action: "Manage"},
-    { id: 3, photo:img3, name: 'Smart Watch', price: 17,  stock: 17, action: "Manage"},
+    { id: 1, photo:img1, name: 'Laptop', price: 23,  stock: 7, category: 'Electronics',  action: "Manage"},
+    { id: 2, photo:img2, name: 'Mobile', price: 13,  stock: 3, category: 'Electronics', action: "Manage"},
+    { id: 3, photo:img3, name: 'Smart Watch', price: 17,  stock: 17, category: 'Accessories', action: "Manage"},
+    { id: 4, photo:img3, name: 'Laptiop', price: 34,  stock: 1, category: 'Electronics', action: "Manage"},
+    { id: 5, photo:img3, name: 'Smart Watch', price: 13,  stock: 3, category: 'Accessories', action: "Manage"},
   ];

@@ -1,8 +1,8 @@
 import React from "react";
-import WidgetItem from "../components/admin/dashboard/WidgetItem";
+
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import GraphContainer from "../components/admin/dashboard/GraphContainer";
+import ManageProduct from "../components/admin/product/ManageProduct";
 
 const Products = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -12,7 +12,8 @@ const Products = () => {
       <div className="flex items-center justify-between w-full">
         <h1 className="md:text-xl text-md font-semibold ">
           Dashboard{" "}
-          <span className=" font-medium text-gray-500"> / Dashboard</span>
+          <span className=" font-medium text-gray-500"> / Product</span>
+          <span className=" font-medium text-gray-500"> / Manage</span>
         </h1>
         <div className="group">
           <p
@@ -28,9 +29,7 @@ const Products = () => {
         </div>
       </div>
       <div className=" w-full">
-        <WidgetItem />
-        <GraphContainer />
-        
+        <ManageProduct />
       </div>
     </div>
   );
