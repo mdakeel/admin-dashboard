@@ -17,14 +17,14 @@ const ManageProducts = () => {
 
 
   return (
-    <div className="bg-white shadow-sm rounded-lg  w-full px- mt-6 flex">
+    <div className="bg-white shadow-sm rounded-lg  w-full  md:mt-6 mt-3 md:px-6 px-4 flex md:flex-row flex-col items-center">
       
-      <div className="w-[40%] flex items-center justify-center border-gray-500">
+      <div className="md:w-[40%] w-full flex items-center justify-center border-gray-500">
 
-                    <img src={product.photo} alt={product.name} className="w-[350px] h-[350px] p-8 drop-shadow-lg" />
+                    <img src={product.photo} alt={product.name} className="md:w-[350px] md:h-[350px] w-full p-8 drop-shadow-lg" />
   
       </div>
-      <div className="w-[60%] p-8">
+      <div className="md:w-[60%] w-full md:p-10 py-4">
         <div className="w-full bg-white shadow-sm rounded-lg border p-4">
           <table className="w-full table-auto">
             <tbody>
