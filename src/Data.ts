@@ -143,7 +143,7 @@ interface Transaction {
     action: string;
   }
 
-  const img1 = "https://pngimg.com/d/laptop_PNG101764.png"
+  const img1 = "https://pngimg.com/uploads/laptop/laptop_PNG101764.png";
   const img2 = "https://www.pngmart.com/files/15/Apple-iPhone-11-PNG-Clipart.png"
   const img3 = "https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-the-smartwatch-banner-png-image_11919210.png"
 

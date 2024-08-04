@@ -3,11 +3,11 @@
 import React from "react";
 import { Products, transactions } from "../../../Data";
 import { FaPlus } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
 
 const ProductTable: React.FC = () => {
-  const params = useParams();
+  
   return (
     <div className="w-full mt-7">
       <div className="w-full flex lg:items-center items-start justify-between lg:flex-row flex-col gap-4 ">
@@ -15,14 +15,14 @@ const ProductTable: React.FC = () => {
           <h2 className="md:text-[20px] text-[17px] px-1 font-semibold  ">
             All Products : <span>03</span>
           </h2>
-          <p className="bg-white md:text-[16px] text-[14px] text-gray-600 hover:text-black border hover:border-blue-200 shadow-sm md:py-[6.5px] py-[5px] md:px-4 px-2 flex items-center gap-2 cursor-pointer rounded-md font-medium ">
+          <p className="bg-white md:text-[16px] text-[14px] text-gray-600 hover:text-black border hover:border-blue-200 shadow-sm md:py-[8px] py-[5px] md:px-4 px-2 flex items-center gap-2 cursor-pointer rounded-md font-medium ">
             <FaPlus size={16} className="text-blue-500" />
             Add Product
           </p>
         </div>
 
-        <div className="w-full  bg-white py-[6px] px-2 border hover:border-blue-200 flex  items-center justify-center gap-2 cursor-pointer rounded-md shadow-sm border font-medium text-white">
-          <select className="flex-grow outline-none md:text-[16px] text-[14px]  bg-transparent text-gray-600 hover:text-black md:px-2">
+        <div className="w-full  bg-white py-[4px] px-2 border hover:border-blue-200 flex  items-center justify-center gap-2 cursor-pointer rounded-md shadow-sm border font-medium text-white">
+          <select className="flex-grow outline-none md:text-[16px] text-[14px]  bg-transparent text-gray-600 hover:text-black py-[5px]">
             <option className="py-[6px] px-4" value="Category">
               Category{" "}
             </option>
@@ -39,7 +39,7 @@ const ProductTable: React.FC = () => {
               Watch
             </option>
           </select>
-          <select className="flex-grow outline-none bg-transparent md:text-[16px] text-[14px] text-gray-600 hover:text-black md:px-2 ">
+          <select className="flex-grow outline-none bg-transparent  border-l px-2 border-gray-300  md:text-[16px] text-[14px] text-gray-600 hover:text-black  py-[5px]">
             <option
               className="py-[6px] px-4"
               value="Sort by date (recent first)"
@@ -140,10 +140,10 @@ const ProductTable: React.FC = () => {
       <div className="w-full flex md:flex-row flex-col  items-center md:justify-between justify-center mt-2">
         <p className="md:text-[16px] text-[14px] text-gray-500 font-normal">Showing <span className="font-medium text-black">1</span > to <span className="font-medium text-black">4</span> of <span className="font-medium text-black">24</span> results</p>
         <div className="flex items-center gap-4">
-          <button className="flex items-center gap-2 md:text-[16px] text-[14px] font-semibold text-gray-500 hover:text-black  hover:border-blue-200 px-4 py-[5px]
-          cursor-pointer "> <RiArrowLeftSFill  className="md:text-[18px] text-[16px]" /> Prev</button>
-          <button className="flex items-center gap-2 md:text-[16px] text-[14px] font-semibold text-gray-500 hover:text-black  hover:border-blue-100 px-4 py-[5px]
-          cursor-pointer ">Next <RiArrowRightSFill   className="md:text-[18px] text-[16px]" /></button>
+          <button className="flex items-center group gap-1 md:text-[16px] text-[14px] font-semibold text-gray-500 hover:text-black  hover:border-blue-200 px-4 py-[5px]
+          cursor-pointer "> <RiArrowLeftSFill  className="md:text-[18px] text-[16px] group-hover:-translate-x-1 transition-transform"  /> Prev</button>
+          <button className="flex items-center group gap-1 md:text-[16px] text-[14px] font-semibold text-gray-500 hover:text-black  hover:border-blue-100 px-4 py-[5px]
+          cursor-pointer ">Next <RiArrowRightSFill   className="md:text-[18px] text-[16px] group-hover:translate-x-1 transition-transform" /></button>
         </div>
       </div>
     </div>
