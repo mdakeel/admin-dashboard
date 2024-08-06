@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTable, useSortBy, Column, usePagination } from 'react-table';
 import { AiOutlineSortAscending, AiOutlineSortDescending} from 'react-icons/ai'
 import { Products } from "../../../Data";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
+import AddProduct from "./AddProduct";
 
 interface Product {
   id: number;
@@ -45,7 +46,7 @@ const columns: Column<Product>[] = [
 
 
 const ProductTable: React.FC = () => {
-   const show : boolean = true
+  const [showModal, setShowModal] = useState(false)
 
   const {
     getTableProps,
@@ -66,13 +67,15 @@ const ProductTable: React.FC = () => {
   );
 
   return (
+    <div className="w-full ">
     <div className="w-full mt-7">
+      
       <div className="w-full flex lg:items-center items-start justify-between lg:flex-row flex-col gap-4 ">
         <div className="w-full flex items-center justify-between gap-4">
           <h2 className="md:text-[20px] text-[17px] px-1 font-semibold">
             All Products : <span>03</span>
           </h2>
-          <p className="bg-white md:text-[16px] text-[13px] text-gray-600 hover:text-black border hover:border-blue-200 shadow-sm md:py-[8px] py-[5px] md:px-4 px-2 flex items-center gap-2 cursor-pointer rounded-md font-medium">
+          <p onClick={() => setShowModal(true)} className="bg-white md:text-[16px] text-[13px] text-gray-600 hover:text-black border hover:border-blue-200 shadow-sm md:py-[8px] py-[5px] md:px-4 px-2 flex items-center gap-2 cursor-pointer rounded-md font-medium">
             <FaPlus size={14} className="text-blue-500" />
             Add Product
           </p>
@@ -167,8 +170,7 @@ const ProductTable: React.FC = () => {
       </div>
      
       <div className="w-full flex md:flex-row flex-col items-center md:justify-between justify-center mt-3">
-        {show && (
-            <>
+  
             <p className="md:text-[16px] text-[14px] text-gray-500 font-normal">
               Showing <span className="font-medium text-black">{pageIndex + 1} </span> to{" "}
               <span className="font-medium text-black">{Math.min((pageIndex + 1) * pageSize, Products.length)}</span> of{" "}
@@ -188,10 +190,16 @@ const ProductTable: React.FC = () => {
                 <RiArrowRightSFill className={`md:text-[18px] text-[16px] ${canNextPage ? "group-hover:translate-x-1" : "group-hover:-translate-x-none"}  transition-transform`}/>
               </button>
             </div>
-            </>
-        )}
+           
+    
         
       </div>
+      </div>
+
+
+            <div>          
+            <AddProduct  modal={{showModal, setShowModal}}/>
+            </div>
     </div>
   );
 };
