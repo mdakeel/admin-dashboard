@@ -1,6 +1,6 @@
 import React from "react";
-import { useTable, useSortBy, Column } from 'react-table';
-
+import { useTable, useSortBy, Column, usePagination } from 'react-table';
+import { AiOutlineSortAscending, AiOutlineSortDescending} from 'react-icons/ai'
 import { Products } from "../../../Data";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -43,17 +43,26 @@ const columns: Column<Product>[] = [
   },
 ];
 
+
 const ProductTable: React.FC = () => {
+   const show : boolean = true
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     prepareRow,
+    canNextPage,
+    canPreviousPage,
+    pageCount,
+    gotoPage,
+    state: {pageIndex, pageSize},
+    nextPage,
+    previousPage,
+    page
   } = useTable<Product>(
-    { columns, data: Products },
-    useSortBy 
+    { columns, data: Products, initialState : {pageIndex : 0, pageSize : 4} },
+    useSortBy, usePagination
   );
 
   return (
@@ -63,14 +72,14 @@ const ProductTable: React.FC = () => {
           <h2 className="md:text-[20px] text-[17px] px-1 font-semibold">
             All Products : <span>03</span>
           </h2>
-          <p className="bg-white md:text-[16px] text-[14px] text-gray-600 hover:text-black border hover:border-blue-200 shadow-sm md:py-[8px] py-[5px] md:px-4 px-2 flex items-center gap-2 cursor-pointer rounded-md font-medium">
-            <FaPlus size={16} className="text-blue-500" />
+          <p className="bg-white md:text-[16px] text-[13px] text-gray-600 hover:text-black border hover:border-blue-200 shadow-sm md:py-[8px] py-[5px] md:px-4 px-2 flex items-center gap-2 cursor-pointer rounded-md font-medium">
+            <FaPlus size={14} className="text-blue-500" />
             Add Product
           </p>
         </div>
 
         <div className="w-full bg-white py-[4px] px-2 border hover:border-blue-200 flex items-center justify-center gap-2 cursor-pointer rounded-md shadow-sm border font-medium text-white">
-          <select className="flex-grow outline-none md:text-[16px] text-[14px] bg-transparent text-gray-600 hover:text-black py-[5px]">
+          <select className="flex-grow outline-none md:text-[16px] text-[12px] bg-transparent text-gray-600 hover:text-black py-[5px]">
             <option className="py-[6px] px-4" value="Category">
               Category
             </option>
@@ -87,7 +96,7 @@ const ProductTable: React.FC = () => {
               Watch
             </option>
           </select>
-          <select className="flex-grow outline-none bg-transparent border-l px-2 border-gray-300 md:text-[16px] text-[14px] text-gray-600 hover:text-black py-[5px]">
+          <select className="flex-grow outline-none bg-transparent border-l px-2 border-gray-300 md:text-[16px] text-[12px] text-gray-600 hover:text-black py-[5px]">
             <option className="py-[6px] px-4" value="Sort by date (recent first)">
               Sort by date (recent first)
             </option>
@@ -108,13 +117,22 @@ const ProductTable: React.FC = () => {
           <thead className="w-full bg-gray-50">
             {headerGroups.map((hg) => (
               <tr {...hg.getHeaderGroupProps()} className="cursor-pointer w-full border-b">
-                {hg.headers.map((column : any) => (
+                {hg.headers.map((column) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())} 
                     className="py-4 px-6 text-[17px] font-medium text-left"
                     key={column.id}
                   >
+                    <div className="flex items-center gap-1">
                     {column.render("Header")}
+                    {
+                      column.isSorted && (
+                        <span>
+                          {column.isSortedDesc ? (<AiOutlineSortAscending />) : (<AiOutlineSortDescending />)}
+                        </span>
+                      )
+                    }
+                    </div>
                   
                   </th>
                 ))}
@@ -122,7 +140,7 @@ const ProductTable: React.FC = () => {
             ))}
           </thead>
           <tbody {...getTableBodyProps()} className="w-full">
-            {rows.map((row) => {
+            {page.map((row) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()} className="hover:bg-gray-50 cursor-default w-full border-b">
@@ -147,23 +165,32 @@ const ProductTable: React.FC = () => {
           </tbody>
         </table>
       </div>
-
-      <div className="w-full flex md:flex-row flex-col items-center md:justify-between justify-center mt-2">
-        <p className="md:text-[16px] text-[14px] text-gray-500 font-normal">
-          Showing <span className="font-medium text-black">1</span> to{" "}
-          <span className="font-medium text-black">4</span> of{" "}
-          <span className="font-medium text-black">24</span> results
-        </p>
-        <div className="flex items-center gap-4">
-          <button className="flex items-center group gap-1 md:text-[16px] text-[14px] font-semibold text-gray-500 hover:text-black hover:border-blue-200 px-4 py-[5px] cursor-pointer">
-            <RiArrowLeftSFill className="md:text-[18px] text-[16px] group-hover:-translate-x-1 transition-transform" />{" "}
-            Prev
-          </button>
-          <button className="flex items-center group gap-1 md:text-[16px] text-[14px] font-semibold text-gray-500 hover:text-black hover:border-blue-100 px-4 py-[5px] cursor-pointer">
-            Next{" "}
-            <RiArrowRightSFill className="md:text-[18px] text-[16px] group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
+     
+      <div className="w-full flex md:flex-row flex-col items-center md:justify-between justify-center mt-3">
+        {show && (
+            <>
+            <p className="md:text-[16px] text-[14px] text-gray-500 font-normal">
+              Showing <span className="font-medium text-black">{pageIndex + 1} </span> to{" "}
+              <span className="font-medium text-black">{Math.min((pageIndex + 1) * pageSize, Products.length)}</span> of{" "}
+              <span className="font-medium text-black">{Products.length}</span> results
+            </p>
+            <div className="flex items-center gap-2 mt-[8px]">
+            <p className="md:text-[15px] text-[12px] md:mt-0  font-normal text-gray-500 py-[3px] bg-white shadow-sm cursor-pointer border hover:border-blue-200 px-3 rounded-md" onClick={() => gotoPage(0)}>First Page</p>
+            <p className="md:text-[15px] text-[12px] md:mt-0  font-normal text-gray-500 py-[3px] bg-white shadow-sm cursor-pointer border hover:border-blue-200 px-3 rounded-md" onClick={() => gotoPage(pageCount - 1)}>Last Page</p>
+            </div>
+            <div className="flex items-center gap-6 mt-[4px]">
+              <button disabled={!canPreviousPage} onClick={previousPage} className={`flex items-center group gap-1 md:text-[16px] text-[14px] font-semibold text-gray-500 hover:text-black hover:border-blue-200  py-[5px] ${canPreviousPage ? "cursor-pointer" : "cursor-not-allowed  hover:text-gray-400"} `}>
+                <RiArrowLeftSFill className={`md:text-[18px] text-[16px] ${canPreviousPage ? "group-hover:-translate-x-1" : "group-hover:-translate-x-none"}  transition-transform`} />{" "}
+                Prev
+              </button>
+              <button disabled={!canNextPage} onClick={nextPage} className={`flex items-center group gap-1 md:text-[16px] text-[14px] font-semibold text-gray-500 hover:text-black hover:border-blue-200  py-[5px] ${canNextPage ? "cursor-pointer" : "cursor-not-allowed  hover:text-gray-400"} `}>
+                Next{" "}
+                <RiArrowRightSFill className={`md:text-[18px] text-[16px] ${canNextPage ? "group-hover:translate-x-1" : "group-hover:-translate-x-none"}  transition-transform`}/>
+              </button>
+            </div>
+            </>
+        )}
+        
       </div>
     </div>
   );

@@ -146,11 +146,22 @@ interface Transaction {
   const img1 = "https://pngimg.com/uploads/laptop/laptop_PNG101764.png";
   const img2 = "https://www.pngmart.com/files/15/Apple-iPhone-11-PNG-Clipart.png"
   const img3 = "https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-the-smartwatch-banner-png-image_11919210.png"
-
+ const img4 = "https://www.fitbit.com/global/content/dam/fitbit/global/pdp/devices/charge-5/hero-static/charge5-black-device-3qtr.png"
+ const img5 = "https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-bluetooth-headset-electronics-red-transparent-png-image_6687197.png"
   export const Products: Product[] = [
-    { id: 1, photo:img1, name: 'Laptop', price: 23,  stock: 7, category: 'Electronics',  action: "Manage"},
-    { id: 2, photo:img2, name: 'Mobile', price: 13,  stock: 3, category: 'Electronics', action: "Manage"},
-    { id: 3, photo:img3, name: 'Smart Watch', price: 17,  stock: 17, category: 'Accessories', action: "Manage"},
-    { id: 4, photo:img1, name: 'Laptiop', price: 34,  stock: 1, category: 'Electronics', action: "Manage"},
-    { id: 5, photo:img3, name: 'Smart Watch', price: 13,  stock: 3, category: 'Accessories', action: "Manage"},
+    { id: 1, name: 'Gaming Laptop', price: 1299, stock: 15, category: 'Electronics', action: "Manage", photo: img1 },
+    { id: 2, name: 'Smartphone', price: 699, stock: 20, category: 'Electronics', action: "Manage", photo: img2 },
+    { id: 3, name: 'Fitness Tracker', price: 99, stock: 30, category: 'Accessories', action: "Manage", photo: img3 },
+    { id: 4, name: '4K Monitor', price: 349, stock: 10, category: 'Electronics', action: "Manage", photo: img5 },
+    { id: 5, name: 'Bluetooth Headphones', price: 149, stock: 25, category: 'Accessories', action: "Manage", photo: img2 },
+    { id: 6, name: 'Wireless Mouse', price: 29, stock: 50, category: 'Electronics', action: "Manage", photo: img4 },
+    { id: 7, name: 'Mechanical Keyboard', price: 89, stock: 12, category: 'Electronics', action: "Manage", photo: img1 },
+    { id: 8, name: 'Smart Home Speaker', price: 199, stock: 8, category: 'Accessories', action: "Manage", photo: img2 },
+    { id: 9, name: 'External SSD', price: 259, stock: 6, category: 'Electronics', action: "Manage", photo: img3 },
+    { id: 10, name: 'Action Camera', price: 499, stock: 5, category: 'Electronics', action: "Manage", photo: img5 },
+    { id: 11, name: 'Tablet', price: 399, stock: 18, category: 'Electronics', action: "Manage", photo: img2 },
+    { id: 12, name: 'Smartwatch', price: 249, stock: 22, category: 'Accessories', action: "Manage", photo: img5 },
+    { id: 13, name: 'Laptop Stand', price: 59, stock: 35, category: 'Accessories', action: "Manage", photo: img1 },
+    { id: 14, name: 'Desk Lamp', price: 45, stock: 40, category: 'Accessories', action: "Manage", photo: img4 },
+    { id: 15, name: 'Webcam', price: 89, stock: 28, category: 'Electronics', action: "Manage", photo: img3 },
   ];
