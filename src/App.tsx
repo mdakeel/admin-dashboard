@@ -19,12 +19,12 @@ function App() {
               <Dashboard />
             </Suspense>
           } />
-          <Route path='admin/products' element={
+          <Route path='admin/product' element={
             <Suspense fallback={<Loader />}>
               <Products />
             </Suspense>
-          } />
-          <Route path='admin/products/:id' element={
+          } /> 
+          <Route path='admin/product/:id' element={
             <Suspense fallback={<Loader />}>
               <ManageProducts />
             </Suspense>

@@ -30,7 +30,7 @@ export const dashboard: SidebarItem[] = [
     },
     {
         id: 2,
-        url: '/admin/products',
+        url: '/admin/product',
         text: 'Products',
         icon: RiShoppingBag2Line
     },
@@ -129,6 +129,31 @@ interface Transaction {
     { id: 3, name: 'Mike Johnson', date: '2024-03-10', quantity: 2,  amount: 300, status: 'Pending' },
     { id: 4, name: 'Chris Lee', date: '2024-04-05', quantity: 13,  amount: 150, status: 'Shipped' },
   ];
+
+//   categories 
+interface CategoryType{
+    id: number;
+    name : string
+}
+
+export const Categories: CategoryType[] =[
+    {
+        id:1,
+        name : "ALL"
+    },
+    {
+        id:1,
+        name : "Electronics"
+    },
+    {
+        id:1,
+        name : "Accessories"
+    },
+    {
+        id:1,
+        name : "Watch"
+    },
+]
 
 //   product data
 
