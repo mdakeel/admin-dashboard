@@ -173,6 +173,7 @@ export const Categories: CategoryType[] =[
   const img3 = "https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-the-smartwatch-banner-png-image_11919210.png"
  const img4 = "https://www.fitbit.com/global/content/dam/fitbit/global/pdp/devices/charge-5/hero-static/charge5-black-device-3qtr.png"
  const img5 = "https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-bluetooth-headset-electronics-red-transparent-png-image_6687197.png"
+
   export const Products: Product[] = [
     { id: 1, name: 'Gaming Laptop', price: 1299, stock: 15, category: 'Electronics', action: "Manage", photo: img1 },
     { id: 2, name: 'Smartphone', price: 699, stock: 20, category: 'Electronics', action: "Manage", photo: img2 },
@@ -190,3 +191,256 @@ export const Categories: CategoryType[] =[
     { id: 14, name: 'Desk Lamp', price: 45, stock: 40, category: 'Accessories', action: "Manage", photo: img4 },
     { id: 15, name: 'Webcam', price: 89, stock: 28, category: 'Electronics', action: "Manage", photo: img3 },
   ];
+
+//   customers data
+const img01 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdvHO3qHjpil9S7NCQHb766lEGUyiuPPrHQg&s"
+const img02 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIvYT9zY25Pjsbw9Ier_-4nI2iHBA2JeK4EQ&s"
+const img03 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ00b0S9PaTtcZ84tTKJ0a4kmFPUL0unrkw1Q&s"
+const img04 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-9I44lKrqr1a-qrgKSsb8RVgliz3lKvYGDA&s"
+const img05 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhfiJ-1T2MNpEforhO58TlsedzvEhZWEYgSA&s"
+
+export interface CustomerType {
+    id: number;
+    avatar:string;
+    name: string;
+    gender: string;
+    email: string;
+     role : string;
+    action: string;
+  }
+
+  
+  export const Customers: CustomerType[] = [
+    {
+      "id": 1,
+      "avatar": img04,
+      "name": "John Doe",
+      "gender": "Male",
+      "email": "johndoe@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 2,
+      "avatar": img01,
+      "name": "Jane Smith",
+      "gender": "Female",
+      "email": "janesmith@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 3,
+      "avatar": img03,
+      "name": "Sam Brown",
+      "gender": "Male",
+      "email": "sambrown@example.com",
+      "role": "Admin",
+      "action": "delete"
+    },
+    {
+      "id": 4,
+      "avatar": img02,
+      "name": "Lisa Johnson",
+      "gender": "Female",
+      "email": "lisajohnson@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 5,
+      "avatar": img02,
+      "name": "Paul Wilson",
+      "gender": "Male",
+      "email": "paulwilson@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 6,
+      "avatar": img05,
+      "name": "Emily Davis",
+      "gender": "Female",
+      "email": "emilydavis@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 7,
+      "avatar": img03,
+      "name": "Michael Miller",
+      "gender": "Male",
+      "email": "michaelmiller@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 8,
+      "avatar": img01,
+      "name": "Jessica Garcia",
+      "gender": "Female",
+      "email": "jessicagarcia@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 9,
+      "avatar": img04,
+      "name": "David Martinez",
+      "gender": "Male",
+      "email": "davidmartinez@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 10,
+      "avatar": img05,
+      "name": "Sarah Anderson",
+      "gender": "Female",
+      "email": "sarahanderson@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 11,
+      "avatar": img01,
+      "name": "Daniel Thomas",
+      "gender": "Male",
+      "email": "danielthomas@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 12,
+      "avatar": img02,
+      "name": "Laura Taylor",
+      "gender": "Female",
+      "email": "laurataylor@example.com",
+      "role": "Admin",
+      "action": "delete"
+    },
+    {
+      "id": 13,
+      "avatar": img04,
+      "name": "James Lee",
+      "gender": "Male",
+      "email": "jameslee@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 14,
+      "avatar": img03,
+      "name": "Sophie Harris",
+      "gender": "Female",
+      "email": "sophieharris@example.com",
+      "role": "User",
+      "action": "delete"
+    },
+    {
+      "id": 15,
+      "avatar": img05,
+      "name": "Peter Clark",
+      "gender": "Male",
+      "email": "peterclark@example.com",
+      "role": "User",
+      "action": "delete"
+    }
+  ]
+  
+
+
+//   transaction table data
+
+interface TransactionType {
+    id: number,
+    user:string,
+    amount:number,
+    quantity:string,
+    status:string,
+    action:string
+}
+
+export const Transactions:TransactionType[] = [
+        {
+          "id": 1,
+          "user": "John Doe",
+          "amount": 150,
+          "quantity": "2",
+          "status": "Pending",
+          "action": "Manage"
+        },
+        {
+          "id": 2,
+          "user": "Jane Smith",
+          "amount": 300,
+          "quantity": "1",
+          "status": "Delivered",
+          "action": "Manage"
+        },
+        {
+          "id": 3,
+          "user": "Alice Johnson",
+          "amount": 450,
+          "quantity": "3",
+          "status": "Pending",
+          "action": "Manage"
+        },
+        {
+          "id": 4,
+          "user": "Bob Brown",
+          "amount": 120,
+          "quantity": "1",
+          "status": "Shipped",
+          "action": "Manage"
+        },
+        {
+          "id": 5,
+          "user": "Charlie Davis",
+          "amount": 200,
+          "quantity": "2",
+          "status": "Cancelled",
+          "action": "Manage"
+        },
+        {
+          "id": 6,
+          "user": "Diana Evans",
+          "amount": 340,
+          "quantity": "4",
+          "status": "Delivered",
+          "action": "Manage"
+        },
+        {
+          "id": 7,
+          "user": "Frank Green",
+          "amount": 500,
+          "quantity": "5",
+          "status": "Pending",
+          "action": "Manage"
+        },
+        {
+          "id": 8,
+          "user": "Grace Hall",
+          "amount": 250,
+          "quantity": "2",
+          "status": "Shipped",
+          "action": "Manage"
+        },
+        {
+          "id": 9,
+          "user": "Henry Adams",
+          "amount": 300,
+          "quantity": "3",
+          "status": "Delivered",
+          "action": "Manage"
+        },
+        {
+          "id": 10,
+          "user": "Ivy Baker",
+          "amount": 400,
+          "quantity": "4",
+          "status": "Pending",
+          "action": "Manage"
+        }
+      
+]

@@ -3,6 +3,7 @@ import WidgetItem from "../components/admin/dashboard/WidgetItem";
 import ProductTable from "../components/admin/product/ProductTable";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import CustomerTable from "../components/admin/customer/CustomerTable";
 
 const Products = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -28,7 +29,7 @@ const Products = () => {
         </div>
       </div>
       <div className=" w-full">
-        curstomer
+       <CustomerTable />
       </div>
     </div>
   );

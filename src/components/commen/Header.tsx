@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   return (
-    <div className='fixed top-0 xl:left-[254px] xl:w-5/6 left-[30px]  w-[100%] z-10 bg-white md:px-3 px-10'>
+    <div className='fixed top-0 xl:left-[254px] xl:w-5/6 left-[30px]  w-[100%] md:z-0 z-10 bg-white md:px-3 px-10'>
       <div className='flex md:justify-between  md:items-center w-full md:px-8 px-4 py-4'>
       
         <div className='flex w-full items-center gap-2 w-[63%] md:flex hidden'>

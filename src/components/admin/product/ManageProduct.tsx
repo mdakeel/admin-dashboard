@@ -59,7 +59,7 @@ const ManageProducts = () => {
   }
 
   return (
-      <div className="w-full mt-7">
+      <div className="w-full mt-7 z-0">
       <div className="w-full flex lg:items-center lg:p-0 p-2 bg-white  rounded-lg items-start justify-between lg:flex-row flex-col  ">
       
       <div className="md:w-[43%] w-full flex items-center lg:border-r border-gray-200 justify-center ">

@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Loader from './components/Loader';
 import AppLayout from './pages/AppLayout';
 import ManageProducts from './pages/ManageProducts';
+import ManageTransactions from './pages/ManageTransactions';
+
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Products = React.lazy(() => import("./pages/Products"));
@@ -37,6 +39,11 @@ function App() {
           <Route path='admin/transaction' element={
             <Suspense fallback={<Loader />}>
               <Transaction />
+            </Suspense>
+          } />
+          <Route path='admin/transaction/:id' element={
+            <Suspense fallback={<Loader />}>
+              <ManageTransactions />
             </Suspense>
           } />
           {/* charts */}
