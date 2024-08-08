@@ -4,13 +4,15 @@ import Loader from './components/Loader';
 import AppLayout from './pages/AppLayout';
 import ManageProducts from './pages/ManageProducts';
 import ManageTransactions from './pages/ManageTransactions';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import Bar from './pages/Bar';
 import Pie from './pages/Pie';
 import Line from './pages/Line';
 import StopWatch from './pages/StopWatch';
 import Toss from './pages/Toss';
 import Coupon from './pages/Coupon';
+import ProtectedRoutes from './services/ProtectedRoutes';
+import Login from './components/admin/user/Login';
 
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -23,6 +25,7 @@ function App() {
     <>
     <Router>
       <Routes>
+        <Route path='/' element={<ProtectedRoutes />}>
         <Route path='/' element={<AppLayout />}>
           <Route path='admin/dashboard' element={
             <Suspense fallback={<Loader />}>
@@ -91,6 +94,8 @@ function App() {
             </Suspense>
           } />
         </Route>
+        </Route>
+        <Route path='/login' element={<Login />} />
       </Routes>
     </Router>
     <ToastContainer />

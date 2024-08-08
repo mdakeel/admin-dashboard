@@ -15,6 +15,7 @@ export interface FormType {
     name: string;
     gender: string;
     email: string;
+    password:string;
     role: string;
     action: string;
   }
