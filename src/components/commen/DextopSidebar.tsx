@@ -5,7 +5,7 @@ import logo from '../../assets/logo.png'
 
 const DextopSidebar = () => {
   return (
-    <div className=' bg-white fixed top-0 left-0  w-1/6 h-full  flex flex-col gap-6'>
+    <div className=' bg-white fixed top-0 left-0  z-20 w-1/6 h-full  flex flex-col gap-6'>
          <Link to={'/admin/dashboard'} className='flex items-center justify-center gap-2 mt-4  pb-4 cursor-pointer '>
                 <img src={logo} className='w-7 object-cover' alt="logo" />
                 <p className=' text-[29px] tracking-widest font-semibold'>DukaaN</p>

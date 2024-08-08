@@ -8,7 +8,7 @@ const Products = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   return (
-    <div className="w-full bg-[#F9FAFB] md:mt-8 mt-6 mb-6  pl-[50px]">
+    <div className="w-full bg-[#F9FAFB] md:mt-8 mt-6 mb-6  md:px-10 px-4 md:pl-[50px] pl-[80px]">
       <div className="flex items-center justify-between w-full">
         <h1 className="md:text-xl text-md font-semibold ">
           Dashboard{" "}

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FaRegBell } from 'react-icons/fa';
 import { MdOutlineLightMode } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
+import logo from '../../assets/logo.png'
 import { toast } from 'react-toastify';
 
 const Header = () => {
@@ -41,9 +42,12 @@ const Header = () => {
   };
 
   return (
-    <div className='fixed top-0 xl:left-[254px] xl:w-5/6 left-[30px] w-[100%] md:z-0 z-10 bg-white md:px-3 px-10'>
-      <div className='flex md:justify-between md:items-center w-full md:px-8 px-4 py-4'>
-        <div className='flex w-full items-center gap-2 w-[63%] md:flex hidden'>
+    <div className='fixed w-full top-0 left-0 flex items-center justify-between py-3 z-10  bg-white md:px-8 px-10'>
+        <div className='md:w-[270px] w-14'>
+           
+        </div>
+
+        <div className='md:w-[50%]  items-center justify-center gap-2 md:flex hidden'>
           <div
             className={`flex items-center w-full rounded-full border ${
               isFocused ? 'border-blue-500' : 'border-gray-200'
@@ -65,7 +69,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className='flex w-full items-center md:justify-end justify-between gap-6'>
+        <div className='flex md:w-[30%] w-full items-center md:justify-end justify-between gap-6'>
           <div className='bg-[#F9FAFB] rounded-full md:p-2 p-1 hover:bg-gray-100 cursor-pointer'>
             <MdOutlineLightMode size={24} />
           </div>
@@ -80,7 +84,6 @@ const Header = () => {
           />
         </div>
       </div>
-    </div>
   );
 }
 
