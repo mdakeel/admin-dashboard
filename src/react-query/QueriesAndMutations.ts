@@ -64,18 +64,11 @@ export const useDeleteProduct = () => {
 
 // fetching all customer
 export const useGetCustomers = () => {
-   const queryClient = useQueryClient() 
+   
     return useQuery<Customer[], Error>({
         queryKey: ['customers'],
         queryFn: getCustomers,
-        
-        // onSuccess: (data:FormType) => {
-        //     console.log(data);
-        //     return data;
-        // },
-        // onError: (error:Error) => {
-        //     console.error(error);
-        // }
+   
     });
 };
 
@@ -98,18 +91,11 @@ export const useDeleteCustomer = () => {
 
 // transaction 
 export const useGetTransactions = () => {
-    const queryClient = useQueryClient() 
+
      return useQuery<Transaction[], Error>({
          queryKey: ['transactions'],
          queryFn: getTransactions,
-         
-         // onSuccess: (data:FormType) => {
-         //     console.log(data);
-         //     return data;
-         // },
-         // onError: (error:Error) => {
-         //     console.error(error);
-         // }
+
      });
  };
 

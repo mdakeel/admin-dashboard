@@ -1,9 +1,8 @@
 import React from "react";
-import WidgetItem from "../components/admin/dashboard/WidgetItem";
-import ProductTable from "../components/admin/product/ProductTable";
+
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import CustomerTable from "../components/admin/customer/CustomerTable";
+
 
 const Bar = () => {
   const navigate = useNavigate(); // Initialize useNavigate

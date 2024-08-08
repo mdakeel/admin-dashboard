@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTable, useSortBy, Column, usePagination } from "react-table";
 import {
   AiOutlineSortAscending,

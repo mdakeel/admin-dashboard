@@ -1,5 +1,4 @@
-import React from "react";
-import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
+
 import { PiShoppingCartBold } from "react-icons/pi";
 import { FiShoppingBag } from "react-icons/fi";
 

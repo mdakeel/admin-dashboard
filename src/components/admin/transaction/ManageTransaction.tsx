@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Categories, Transactions } from '../../../Data';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetTransactions } from '../../../react-query/QueriesAndMutations';
 
@@ -10,7 +9,7 @@ const ManageTransaction = () => {
 
   const { id } = useParams<{ id: string }>();
   const { data } = useGetTransactions()
-  const navigate = useNavigate()
+
 
   const productId = id ? parseInt(id ) : null;
   const product = data && productId !== null ? data.find((item) => item.id === productId) : null;

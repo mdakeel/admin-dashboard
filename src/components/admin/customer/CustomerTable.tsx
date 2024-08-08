@@ -42,7 +42,7 @@ const columns: Column<Customer>[] = [
 
 const CustomerTable: React.FC = () => {
   const [selectCategory, setSelectCategory] = useState("All");
-  const { data, refetch } = useGetCustomers()
+  const { data } = useGetCustomers()
   const {mutateAsync : deleteCustomer} = useDeleteCustomer()
   const navigate = useNavigate()
 

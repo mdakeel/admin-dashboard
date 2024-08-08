@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IoClose } from "react-icons/io5";
 import { useCreateProduct } from '../../../react-query/QueriesAndMutations';
 import { FormType } from '../../../types/types';
-import {v4 as uuidv4} from 'uuid'
+
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -37,16 +37,6 @@ const AddProduct: React.FC<AddProductProps> = ({ modal }) => {
       ...prevFormData,
       [name]: value,
     }));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        photo: file.name, // or handle file differently based on your needs
-      }));
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
