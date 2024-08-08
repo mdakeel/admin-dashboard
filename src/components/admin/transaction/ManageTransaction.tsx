@@ -1,5 +1,5 @@
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useGetTransactions } from '../../../react-query/QueriesAndMutations';
 
 
