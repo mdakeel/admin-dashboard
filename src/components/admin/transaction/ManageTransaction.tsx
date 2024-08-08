@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Categories, Transactions } from '../../../Data';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetTransactions } from '../../../react-query/QueriesAndMutations';
 
-interface FormType {
-  name: string;
-  price: string;
-  stock: string;
-  category: string;
-  photo: string;
-}
 
 const img4 = "https://www.fitbit.com/global/content/dam/fitbit/global/pdp/devices/charge-5/hero-static/charge5-black-device-3qtr.png"
 
 const ManageTransaction = () => {
 
-  const { id } = useParams();
-  const productId = id ? parseInt(id) : null;
-  const product = Transactions.find((item) => item.id === productId);
+  const { id } = useParams<{ id: string }>();
+  const { data } = useGetTransactions()
+  const navigate = useNavigate()
 
+  const productId = id ? parseInt(id ) : null;
+  const product = data && productId !== null ? data.find((item) => item.id === productId) : null;
+  
   if (!product) {
-    return <div>Product not found</div>;
+    return <div>No Data found</div>;
   }
-
+   
+  const total = Number(product.amount) * Number(product.quantity);
+ 
   return (
       <div className="w-full mt-7 z-0">
       <div className="w-full flex lg:items-center lg:p-0 p-2 bg-white  rounded-lg items-start justify-between lg:flex-row flex-col gap-4 ">
@@ -41,10 +40,10 @@ const ManageTransaction = () => {
               </thead>
               <tbody className='w-full'>
                 <tr className='md:text-[14px] text-[12px] w-full text-left text-gray-500 font-normal'>
-                  <td>Smart Watch</td>
-                  <td>800</td>
-                  <td>5</td>
-                  <td>4000</td>
+                  <td>{product.user}</td>
+                  <td>{product.amount}</td>
+                  <td>{product.quantity}</td>
+                  <td>{total}</td>
                 </tr>
               </tbody>
             </table>
@@ -87,7 +86,7 @@ const ManageTransaction = () => {
                 <td className="py-2 px-4 text-[15px]">
                   <tr className='flex items-start justify-start'>
                     <th className='md:text-[14px] text-[12px] font-medium text-gray-500'>Subtotal : </th>
-                    <td className='md:text-[14px] text-[12px] font-normal text-gray-500'>4000</td>
+                    <td className='md:text-[14px] text-[12px] font-normal text-gray-500'>{total}</td>
                      </tr>
                     <tr className='flex items-start justify-start'> 
                     <th className='md:text-[14px] text-[12px] font-medium text-gray-500'>Shipping Charge : </th>
@@ -95,7 +94,7 @@ const ManageTransaction = () => {
                     </tr>
                     <tr className='flex items-start justify-start'> 
                     <th className='md:text-[14px] text-[12px] font-medium text-gray-500'>Total : </th>
-                    <td className='md:text-[14px] text-[12px] font-normal text-gray-500'>4050</td>
+                    <td className='md:text-[14px] text-[12px] font-normal text-gray-500'>{total + 50}</td>
                     </tr>
                     
                 </td>
@@ -107,7 +106,7 @@ const ManageTransaction = () => {
                 <td className="py-2 px-4 text-[15px]">
                   <tr className='flex items-start justify-start'>
                     <th className='md:text-[14px] text-[12px] font-medium text-gray-500'>Status : </th>
-                    <td className='md:text-[14px] text-[12px] font-normal  text-yellow-500'>Pending</td>
+                    <td className='md:text-[14px] text-[12px] font-normal  text-yellow-500'>{product.status}</td>
                     </tr>
                 </td>
               </tr>

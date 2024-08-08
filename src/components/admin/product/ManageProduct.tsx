@@ -1,37 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { Categories, Products } from '../../../Data';
-import { useParams } from 'react-router-dom';
+import { Categories} from '../../../Data';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDeleteProduct, useGetProducts, useUpdateProduct } from '../../../react-query/QueriesAndMutations';
+import { FormType } from '../../../types/types';
+import { MdDeleteForever } from "react-icons/md";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
 
-interface FormType {
-  name: string;
-  price: string;
-  stock: string;
-  category: string;
-  photo: string;
-}
 
 const ManageProducts = () => {
-  
+  const { data } = useGetProducts()
+  const { id } = useParams<{ id: string }>();
   const [formData, setFormData] = useState<FormType>({
+    id:0,
     name: "",
     price: "",
     stock: "",
     category: "",
     photo: "",
+    action: ""
   });
 
-  const { id } = useParams();
-  const productId = id ? parseInt(id) : null;
-  const product = Products.find((item) => item.id === productId);
+  const navigate = useNavigate()
+   
+  const { mutateAsync : updateProduct} = useUpdateProduct()
+  const { mutateAsync : deleteProduct} = useDeleteProduct()
+ 
+  const productId = id ? parseInt(id ) : null;
+  const product = data && productId !== null ? data.find((item) => item.id === productId) : null;
+
 
   useEffect(() => {
     if (product) {
       setFormData({
+        id: product.id,
         name: product.name,
         price: product.price.toString(),
         stock: product.stock.toString(),
         category: product.category,
         photo: product.photo,
+        action: product.action
       });
     }
   }, [product]);
@@ -44,15 +52,61 @@ const ManageProducts = () => {
     }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        photo: file.name, // or handle file differently based on your needs
-      }));
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  
+    if (!formData.name || !formData.price || !formData.stock || !formData.category) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+  
+    try {
+      await updateProduct({...formData, action:"Manage"});
+      // Reset the form data
+      setFormData({
+        id: Date.now(),
+        name: "",
+        price: "",
+        stock: "",
+        category: "",
+        photo: "",
+        action: "Manage"
+      });
+
+      toast.success("Product Updated Successfully!", {
+        position: "top-center"
+      });
+      navigate("/admin/product");
+      console.log("Product Updated Successfully");
+    } catch (error) {
+      toast.error("Failed to Update product!", {
+        position: "top-center"
+      });
+      console.error('Error updating product:', error);
     }
   };
+
+  const handleDelete = async (id:any) => {
+    try {
+      await deleteProduct(id); // Ensure `deleteProduct` expects a string
+      console.log("Product deleted successfully");
+      toast.success("Product Deleted Successfully !", {
+        position: "top-center"
+      });
+      navigate("/admin/product"); // Optional: navigate after deletion
+    } catch (error) {
+      toast.error("Failed to delete product!", {
+        position: "top-center"
+      });
+      console.error('Error deleting product:', error);
+      alert('An error occurred while deleting the product. Please try again.');
+    }
+  };
+  
+  
+
+  if (!data) return <div>No data available</div>;
+
 
   if (!product) {
     return <div>Product not found</div>;
@@ -60,13 +114,14 @@ const ManageProducts = () => {
 
   return (
       <div className="w-full mt-7 z-0">
+        <form onSubmit={handleSubmit}>
       <div className="w-full flex lg:items-center lg:p-0 p-2 bg-white  rounded-lg items-start justify-between lg:flex-row flex-col  ">
       
       <div className="md:w-[43%] w-full flex items-center lg:border-r border-gray-200 justify-center ">
         <div className='flex flex-col gap-4 lg:p-10 p-4'>
           <img src={formData.photo} alt={formData.photo} className="md:w-[310px] md:h-[310px] w-full px-6 py-6 drop-shadow-lg" />
           <div>
-            <input type="file" name="photo"  onChange={handleFileChange} className="file-input" />
+            <input type="text" name="photo" value={formData.photo} onChange={handleChange} className='lg:text-[16px] border-b text-gray-500 text-[14px] outline-none lg:py-2 lg:px-4 px-2 py-[6px] bg-transparent  rounded-md w-full' />
           </div>
         </div>
       </div>
@@ -121,12 +176,16 @@ const ManageProducts = () => {
            
           </table>
           <div className='w-full flex items-end justify-end gap-4 mt-8'>
-                    <button type="button"  className='lg:text-[16px] text-[14px] text-center font-medium border rounded-md text-gray-500 border-gray-200 hover:bg-gray-50 lg:py-[10px] lg:px-4 px-2 py-[6px]'>Cancel</button>
+                    <div  onClick={() => handleDelete(product.id)} className='border  rounded-md hover:bg-red-50 lg:py-[10px] lg:px-4 px-2 py-[6px]'><MdDeleteForever size={24} className='text-red-600' /></div>
+                    
+                    <button type="button" onClick={() => navigate("/admin/product")} className='lg:text-[16px] text-[14px] text-center font-medium border rounded-md text-gray-500 border-gray-200 hover:bg-gray-50 lg:py-[10px] lg:px-4 px-2 py-[6px]'>Cancel</button>
                     <button type='submit' className='lg:text-[16px] text-[14px] text-center text-white font-medium rounded-md bg-blue-600 hover:bg-blue-700 lg:py-[10px] lg:px-4 px-2 py-[6px]'>Update product</button>
               </div>
         </div>
       </div>
+     
     </div>
+    </form>
     </div>
     
   );

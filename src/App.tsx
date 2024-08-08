@@ -4,6 +4,13 @@ import Loader from './components/Loader';
 import AppLayout from './pages/AppLayout';
 import ManageProducts from './pages/ManageProducts';
 import ManageTransactions from './pages/ManageTransactions';
+import { ToastContainer, toast } from 'react-toastify';
+import Bar from './pages/Bar';
+import Pie from './pages/Pie';
+import Line from './pages/Line';
+import StopWatch from './pages/StopWatch';
+import Toss from './pages/Toss';
+import Coupon from './pages/Coupon';
 
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -13,6 +20,7 @@ const Transaction = React.lazy(() => import("./pages/Transaction"));
 
 function App() {
   return (
+    <>
     <Router>
       <Routes>
         <Route path='/' element={<AppLayout />}>
@@ -46,11 +54,47 @@ function App() {
               <ManageTransactions />
             </Suspense>
           } />
+
+
           {/* charts */}
+          <Route path='admin/chart/bar' element={
+            <Suspense fallback={<Loader />}>
+              <Bar />
+            </Suspense>
+          } />
+          <Route path='admin/chart/pie' element={
+            <Suspense fallback={<Loader />}>
+              <Pie />
+            </Suspense>
+          } />
+          <Route path='admin/chart/line' element={
+            <Suspense fallback={<Loader />}>
+              <Line />
+            </Suspense>
+          } />
+
+
           {/* apps */}
+          <Route path='admin/app/stopwatch' element={
+            <Suspense fallback={<Loader />}>
+              <StopWatch />
+            </Suspense>
+          } />
+          <Route path='admin/app/coupon' element={
+            <Suspense fallback={<Loader />}>
+              <Coupon />
+            </Suspense>
+          } />
+          <Route path='admin/app/toss' element={
+            <Suspense fallback={<Loader />}>
+              <Toss />
+            </Suspense>
+          } />
         </Route>
       </Routes>
     </Router>
+    <ToastContainer />
+    </>
   );
 }
 

@@ -4,23 +4,16 @@ import {
   AiOutlineSortAscending,
   AiOutlineSortDescending,
 } from "react-icons/ai";
-import { Categories, Products } from "../../../Data";
+import { Categories} from "../../../Data";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
 import AddProduct from "./AddProduct";
+import { useGetProducts } from "../../../react-query/QueriesAndMutations";
+import { FormType } from "../../../types/types";
 
-interface Product {
-  id: number;
-  photo: string;
-  name: string;
-  price: number;
-  stock: number;
-  category: string;
-  action: string;
-}
 
-const columns: Column<Product>[] = [
+const columns: Column<FormType>[] = [
   {
     Header: "Photo",
     accessor: "photo",
@@ -49,28 +42,34 @@ const columns: Column<Product>[] = [
 
 const ProductTable: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectCategory, setSelectCategory] = useState("ALL");
+  const [selectCategory, setSelectCategory] = useState("All");
   const [sortBy, setSortBy] = useState("date-desc");
 
+  const { data } = useGetProducts()
+
   const filterProduct = useMemo(() => {
-    let sortedData = [...Products];
+    if (!data) return []; 
+
+    
 
     if (sortBy === "price-asc") {
-      sortedData.sort((a, b) => a.price - b.price);
+      data.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
     } else if (sortBy === "price-desc") {
-      sortedData.sort((a, b) => b.price - a.price);
+      data.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
     }
 
-    return sortedData.filter(
-      (item) => selectCategory === "ALL" || item.category === selectCategory
+    return data.filter(
+      (item) => selectCategory === "All" || item.category === selectCategory
     );
-  }, [selectCategory, sortBy]);
+  }, [selectCategory, sortBy, data]);
 
   const handleCategoryClick = (category: string) => {
     if (category !== selectCategory) {
       setSelectCategory(category);
     }
   };
+
+
 
   const {
     getTableProps,
@@ -85,7 +84,7 @@ const ProductTable: React.FC = () => {
     nextPage,
     previousPage,
     page,
-  } = useTable<Product>(
+  } = useTable<FormType>(
     {
       columns,
       data: filterProduct,
@@ -120,6 +119,7 @@ const ProductTable: React.FC = () => {
             >
               {Categories &&
                 Categories.map((category) => (
+
                   <option
                     key={category.id}
                     className={`py-[6px] px-4" ${
@@ -227,9 +227,9 @@ const ProductTable: React.FC = () => {
             </span>{" "}
             to{" "}
             <span className="font-medium text-black">
-              {Math.min((pageIndex + 1) * pageSize, Products.length)}
+              {Math.min((pageIndex + 1) * pageSize, filterProduct.length)}
             </span>{" "}
-            of <span className="font-medium text-black">{Products.length}</span>{" "}
+            of <span className="font-medium text-black">{filterProduct.length}</span>{" "}
             results
           </p>
           <div className="flex items-center gap-2 mt-[8px]">

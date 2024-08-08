@@ -139,20 +139,24 @@ interface CategoryType{
 export const Categories: CategoryType[] =[
     {
         id:1,
-        name : "ALL"
+        name : "All"
     },
     {
-        id:1,
+        id:2,
         name : "Electronics"
     },
     {
-        id:1,
-        name : "Accessories"
+        id:3,
+        name : "Laptop"
     },
     {
-        id:1,
+        id:4,
         name : "Watch"
     },
+    {
+      id:5,
+      name : "Mobile"
+  },
 ]
 
 //   product data

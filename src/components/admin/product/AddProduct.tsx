@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { IoClose } from "react-icons/io5";
+import { useCreateProduct } from '../../../react-query/QueriesAndMutations';
+import { FormType } from '../../../types/types';
+import {v4 as uuidv4} from 'uuid'
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 interface AddProductProps {
   modal: {
@@ -8,24 +14,22 @@ interface AddProductProps {
   };
 }
 
-interface FormType {
-  name: string;
-  price: string;
-  stock: string;
-  category: string;
-  photo: string;
-}
+
 
 const AddProduct: React.FC<AddProductProps> = ({ modal }) => {
   const [formData, setFormData] = useState<FormType>({
+    id: 0,
     name: "",
     price: "",
     stock: "",
     category: "",
     photo: "",
+    action: "Manage"
   });
 
   const { showModal, setShowModal } = modal;
+  const { mutateAsync : createProduct} = useCreateProduct()
+  const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -45,11 +49,34 @@ const AddProduct: React.FC<AddProductProps> = ({ modal }) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log(formData);
+  
+    try {
+      await createProduct(formData);
+      // Optionally, reset the form or show a success message
+      setFormData({
+        id: Date.now(),
+        name: "",
+        price: "",
+        stock: "",
+        category: "",
+        photo: "",
+        action: "Manage"
+      });
+      toast.success("Product Created Successfully!", {
+        position: "top-center"
+      });
+      navigate("/admin/product")
+      setShowModal(false); // Close the modal after submission
+    } catch (error) {
+      toast.error("Failed to Create product!", {
+        position: "top-center"
+      });
+      console.error('Error creating product:', error);
+    }
   };
+  
 
   return (
     <div>
@@ -70,14 +97,15 @@ const AddProduct: React.FC<AddProductProps> = ({ modal }) => {
                   <div className='flex lg:flex-row flex-col gap-4'>
                     <input type="text" name='stock' value={formData.stock} onChange={handleChange} placeholder='Enter Stock Quantity: 03' className='text-[17px] outline-none lg:py-2 lg:px-4 px-2 py-[6px] bg-transparent border-2 rounded-md w-full' />
                     <select name="category" value={formData.category} onChange={handleChange} className='lg:text-[16px] text-[14px] outline-none lg:py-2 lg:px-4 px-2 py-[6px] bg-transparent border-2 text-gray-400 rounded-md w-full'>
-                      <option value="" disabled className='text-gray-500'>Select Category</option>
-                      <option value="Electronics" className='text-gray-500'>Electronics</option>
-                      <option value="Books" className='text-gray-500'>Books</option>
-                      <option value="Clothing" className='text-gray-500'>Clothing</option>
+                    <option value="" disabled className='text-gray-500'>Select Category</option>
+                      <option value="Electronics"  className='text-gray-500'>Electronics</option>
+                      <option value="Laptop" className='text-gray-500'>Laptop</option>
+                      <option value="Watch" className='text-gray-500'>Watch</option>
+                      <option value="Mobile" className='text-gray-500'>Mobile</option>
                     </select>
                   </div>
                   <div>
-                    <input type="file" name="photo" onChange={handleFileChange} className="file-input" />
+                    <input type="text" name="photo" placeholder="Enter image url" value={formData.photo} onChange={handleChange} className='lg:text-[16px] text-[14px] outline-none lg:py-2 lg:px-4 px-2 py-[6px] bg-transparent border-2 text-gray-400 rounded-md w-full' />
                   </div>
                   <div className='flex items-end justify-end gap-4'>
                     <button type="button" onClick={() => setShowModal(false)} className='lg:text-[16px] text-[14px] text-center font-medium border rounded-md text-gray-500 border-gray-200 hover:bg-gray-50 lg:py-2 lg:px-4 px-2 py-[6px]'>Cancel</button>
@@ -94,3 +122,5 @@ const AddProduct: React.FC<AddProductProps> = ({ modal }) => {
 }
 
 export default AddProduct;
+
+

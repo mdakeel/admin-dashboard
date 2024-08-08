@@ -4,21 +4,15 @@ import {
   AiOutlineSortAscending,
   AiOutlineSortDescending,
 } from "react-icons/ai";
-import { Transactions } from "../../../Data";
-import { MdDeleteForever } from "react-icons/md";
+
 import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { Transaction } from "../../../types/types";
+import { useGetTransactions } from "../../../react-query/QueriesAndMutations";
 
-interface Customer {
-  id: number;
-  user: string;
-  amount: number;
-  quantity:string;
-  status: string;
-  action: string;
-}
 
-const columns: Column<Customer>[] = [
+
+const columns: Column<Transaction>[] = [
   {
     Header: "User",
     accessor: "user",
@@ -58,22 +52,19 @@ const getStatusClass = (status: string) => {
 
 const TransactionTable: React.FC = () => {
   const [selectCategory, setSelectCategory] = useState("All");
-  const [sortBy, setSortBy] = useState("date-desc");
-  const [role, setRole] = useState("User")
+  const {data} = useGetTransactions()
 
-  const filterProduct = useMemo(() => {
-    let sortedData = [...Transactions];
+  const filterTransaction = useMemo(() => {
+    if(!data) return []
 
-    const data = sortedData.filter(
+    return data.filter(
       (item) =>
         selectCategory === "All" ||
         item.quantity === selectCategory ||
         item.status === selectCategory
     );
-    console.log(data);
-    console.log(Transactions);
-    return data;
-  }, [selectCategory]);
+
+  }, [selectCategory, data]);
 
   const handleCategoryClick = (role: string) => {
     if (role !== selectCategory) {
@@ -94,10 +85,10 @@ const TransactionTable: React.FC = () => {
     nextPage,
     previousPage,
     page,
-  } = useTable<Customer>(
+  } = useTable<Transaction>(
     {
       columns,
-      data: filterProduct,
+      data: filterTransaction,
       initialState: { pageIndex: 0, pageSize: 4 },
     },
     useSortBy,
@@ -110,7 +101,7 @@ const TransactionTable: React.FC = () => {
         <div className="w-full flex lg:items-center items-start justify-between lg:flex-row flex-col gap-4 ">
           <div className="w-full flex items-center justify-between gap-4">
             <h2 className="md:text-[20px] text-[17px] px-1 font-semibold">
-              All Products : <span>{filterProduct.length}</span>
+              All Transactions : <span>{filterTransaction.length}</span>
             </h2>
           </div>
 
@@ -218,7 +209,7 @@ const TransactionTable: React.FC = () => {
             </tbody>
           </table>
 
-          {filterProduct.length === 0 && (
+          {filterTransaction.length === 0 && (
             <p className="w-full px-6 text-center lg:text-[16px] text-[14px] text-gray-500 lg:py-4 py-2 ">
               No Data Found
             </p>
@@ -233,10 +224,10 @@ const TransactionTable: React.FC = () => {
             </span>{" "}
             to{" "}
             <span className="font-medium text-black">
-              {Math.min((pageIndex + 1) * pageSize, Transactions.length)}
+              {Math.min((pageIndex + 1) * pageSize, filterTransaction.length)}
             </span>{" "}
             of{" "}
-            <span className="font-medium text-black">{Transactions.length}</span>{" "}
+            <span className="font-medium text-black">{filterTransaction.length}</span>{" "}
             results
           </p>
           <div className="flex items-center gap-2 mt-[8px]">

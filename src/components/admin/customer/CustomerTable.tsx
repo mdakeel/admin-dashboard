@@ -4,18 +4,14 @@ import {
   AiOutlineSortAscending,
   AiOutlineSortDescending,
 } from "react-icons/ai";
-import { Customers } from "../../../Data";
 import { MdDeleteForever } from "react-icons/md";
 import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
+import { useDeleteCustomer, useGetCustomers } from "../../../react-query/QueriesAndMutations";
+import { Customer } from "../../../types/types";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
-interface Customer {
-  avatar: string;
-  name: string;
-  gender: string;
-  email: string;
-  role: string;
-  action: string;
-}
 
 const columns: Column<Customer>[] = [
   {
@@ -46,28 +42,45 @@ const columns: Column<Customer>[] = [
 
 const CustomerTable: React.FC = () => {
   const [selectCategory, setSelectCategory] = useState("All");
-  const [sortBy, setSortBy] = useState("date-desc");
-  const [role, setRole] = useState("User")
+  const { data, refetch } = useGetCustomers()
+  const {mutateAsync : deleteCustomer} = useDeleteCustomer()
+  const navigate = useNavigate()
 
-  const filterProduct = useMemo(() => {
-    let sortedData = [...Customers];
-
-    const data = sortedData.filter(
+  const filterCustomer = useMemo(() => {
+    if(!data) return []
+  
+    return data.filter(
       (item) =>
         selectCategory === "All" ||
         item.role === selectCategory ||
         item.gender === selectCategory
     );
-    console.log(data);
-    console.log(Customers);
-    return data;
-  }, [selectCategory]);
+  
+  }, [selectCategory, data]);
 
   const handleCategoryClick = (role: string) => {
     if (role !== selectCategory) {
       setSelectCategory(role);
     }
   };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteCustomer(id);
+      toast.success("User deleted Successfully!", {
+        position: "top-center"
+      });
+      console.log("Customer deleted successfully");
+      navigate("/admin/customers")
+    } catch (error) {
+      toast.error("Failed to Delete User!", {
+        position: "top-center"
+      });
+      console.error('Error deleting customer:', error);
+      alert('An error occurred while deleting the customer. Please try again.');
+    }
+  };
+  
 
   const {
     getTableProps,
@@ -85,7 +98,7 @@ const CustomerTable: React.FC = () => {
   } = useTable<Customer>(
     {
       columns,
-      data: filterProduct,
+      data: filterCustomer,
       initialState: { pageIndex: 0, pageSize: 4 },
     },
     useSortBy,
@@ -98,7 +111,7 @@ const CustomerTable: React.FC = () => {
         <div className="w-full flex lg:items-center items-start justify-between lg:flex-row flex-col gap-4 ">
           <div className="w-full flex items-center justify-between gap-4">
             <h2 className="md:text-[20px] text-[17px] px-1 font-semibold">
-              All Products : <span>{filterProduct.length}</span>
+              All Customers : <span>{filterCustomer.length}</span>
             </h2>
           </div>
 
@@ -176,7 +189,7 @@ const CustomerTable: React.FC = () => {
                             className="w-[50px] h-[50px] p-1 rounded-full "
                           />
                         ) : cell.column.id === "action" ? (
-                          <MdDeleteForever className="text-[20px] text-red-500 hover:text-red-600 cursor-pointer"/>
+                          <MdDeleteForever onClick={() => handleDelete(row.original.id)} className="text-[20px] text-red-500 hover:text-red-600 cursor-pointer"/>
                         ) : (
                           cell.render("Cell")
                         )}
@@ -188,7 +201,7 @@ const CustomerTable: React.FC = () => {
             </tbody>
           </table>
 
-          {filterProduct.length === 0 && (
+          {filterCustomer.length === 0 && (
             <p className="w-full px-6 text-center lg:text-[16px] text-[14px] text-gray-500 lg:py-4 py-2 ">
               No Data Found
             </p>
@@ -203,10 +216,10 @@ const CustomerTable: React.FC = () => {
             </span>{" "}
             to{" "}
             <span className="font-medium text-black">
-              {Math.min((pageIndex + 1) * pageSize, Customers.length)}
+              {Math.min((pageIndex + 1) * pageSize, filterCustomer.length)}
             </span>{" "}
             of{" "}
-            <span className="font-medium text-black">{Customers.length}</span>{" "}
+            <span className="font-medium text-black">{filterCustomer.length}</span>{" "}
             results
           </p>
           <div className="flex items-center gap-2 mt-[8px]">
