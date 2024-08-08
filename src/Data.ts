@@ -114,6 +114,21 @@ export const categories: CategoriesItem[] = [
 ];
 
 
+interface Transaction {
+    id: number;
+    name: string;
+    date: string;
+    quantity: number
+    amount: number;
+    status: string
+  }
+  
+  export const transactions: Transaction[] = [
+    { id: 1, name: 'John Doe', date: '2024-01-01', quantity: 4,  amount: 200, status: 'Pending' },
+    { id: 2, name: 'Jane Smith', date: '2024-02-15', quantity: 7,  amount: 450, status: 'Processing' },
+    { id: 3, name: 'Mike Johnson', date: '2024-03-10', quantity: 2,  amount: 300, status: 'Pending' },
+    { id: 4, name: 'Chris Lee', date: '2024-04-05', quantity: 13,  amount: 150, status: 'Shipped' },
+  ];
 
 //   categories 
 interface CategoryType{
@@ -144,9 +159,5 @@ export const Categories: CategoryType[] =[
   },
 ]
 
- 
-  
-
-  
 
 
