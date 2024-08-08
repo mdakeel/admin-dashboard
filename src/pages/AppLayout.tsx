@@ -22,13 +22,13 @@ function AppLayout() {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-[#F9FAFB]">
      
       <div className="flex ">
-        <div className={`transition-all  duration-300 ${isSidebarCollapsed ? 'w-16' : 'w-[270px]'}`}>
+        <div className={`transition-all  duration-300 ${isSidebarCollapsed ? 'w-16' : 'w-[280px]'}`}>
           <Sidebar isCollapsed={isSidebarCollapsed} />
         </div>
-        <div className="xl:w-5/6 w-full bg-[#F9FAFB] md:pt-[72px] pt-[60px]  min-h-screen">
+        <div className="xl:w-5/6 w-full bg-[#F9FAFB] md:pt-[72px] pt-[60px] px-4  min-h-screen">
 		     <Header />
           <Outlet />
         </div>
