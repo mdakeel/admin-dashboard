@@ -8,7 +8,7 @@ const Line = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   return (
-    <div className="w-full bg-[#F9FAFB] md:mt-8 mt-6 mb-6 md:pl-[0px] pl-[10px]">
+    <div className="w-full bg-[#F9FAFB] md:mt-8 mt-6 mb-6 pl-[10px]">
       <div className="flex items-center justify-between w-full">
         <h1 className="md:text-xl text-md font-semibold ">
           Chart{" "}
