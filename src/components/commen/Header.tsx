@@ -42,7 +42,8 @@ const Header = () => {
   };
 
   return (
-    <div className='fixed w-full top-0 left-0 flex items-center justify-between py-3 z-10  bg-white md:px-8 px-10'>
+    <div className='fixed w-full top-0 left-0  py-3 z-10  bg-white '>
+      <div className='md:px-8 px-10 flex items-center justify-between'>
         <div className='md:w-[270px] w-14'>
            
         </div>
@@ -69,7 +70,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className='flex md:w-[30%] w-full items-center md:justify-end justify-between gap-6'>
+        <div className='flex md:w-[25%] w-full items-center md:justify-end justify-between gap-6'>
           <div className='bg-[#F9FAFB] rounded-full md:p-2 p-1 hover:bg-gray-100 cursor-pointer'>
             <MdOutlineLightMode size={24} />
           </div>
@@ -82,6 +83,7 @@ const Header = () => {
             size={24}
             className='cursor-pointer'
           />
+        </div>
         </div>
       </div>
   );
