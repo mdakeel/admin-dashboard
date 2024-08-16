@@ -16,20 +16,23 @@ function AppLayout() {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize(); // Initial check
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <div className="w-full bg-[#F9FAFB]">
-     
       <div className="flex ">
-        <div className={`transition-all  duration-300 ${isSidebarCollapsed ? 'w-16' : 'w-[280px]'}`}>
+        <div
+          className={`transition-all  duration-300 ${
+            isSidebarCollapsed ? "w-16" : "w-[280px]"
+          }`}
+        >
           <Sidebar isCollapsed={isSidebarCollapsed} />
         </div>
-        <div className="xl:w-5/6 w-full bg-[#F9FAFB] md:pt-[72px] pt-[60px] px-4  min-h-screen">
-		     <Header />
+        <div className="xl:w-5/6 w-full bg-[#F9FAFB] md:pt-[72px] pt-[60px] md:pl-4 px-0 min-h-screen">
+          <Header />
           <Outlet />
         </div>
       </div>
